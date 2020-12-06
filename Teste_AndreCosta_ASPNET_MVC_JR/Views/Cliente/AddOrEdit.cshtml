@@ -1,0 +1,65 @@
+﻿@model Teste_AndreCosta_ASPNET_MVC_JR.Models.Cliente
+
+@{
+    ViewData["Title"] = "AddOrEdit";
+
+    bool check = true;
+    if (ViewBag.Check == null)
+    {
+        check = false;
+    }
+}
+
+
+<h4>Clientes</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CPF" class="control-label"></label>
+                <input asp-for="CPF" class="form-control" id="cpf"/>
+                <span asp-validation-for="CPF" class="text-danger"></span>
+            </div>
+            @Html.HiddenFor(model => model.ProdutoId)
+            <div class="form-group">
+                <label asp-for="Produto" class="control-label"></label>
+                <select asp-for="Produto" class="form-control" asp-items="new SelectList(Model.Produtos)" autofocus></select>
+                <span asp-validation-for="Produto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+            @if (check)
+            {
+                <label class="text-danger">CPF/E-mail já cadastrado</label>
+            }
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar à lista de clientes</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}    
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#cpf").mask("000.000.000-00")
+        })        
+    </script>
+}

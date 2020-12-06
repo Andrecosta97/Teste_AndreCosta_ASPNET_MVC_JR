@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "Teste_AndreCosta_ASPNET_MVC_JRContext"
+    }
+  }
+}
